@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        body {
+
+            font-family: "Helvetica Neue", Helvetica, Arial;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: #3b3b3b;
+            -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+            background: #2b2b2b;
+            background-image: linear-gradient(0deg, #00000030, #00000030), url("https://st.depositphotos.com/1522993/4737/v/600/depositphotos_47372005-stock-illustration-orange-blue-background-with-triagles.jpg");
+            background-size: cover;
+        }
+
+        @media screen and (max-width: 580px) {
+            body {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            padding: 40px;
+            max-width: 800px;
+        }
+
+        .table {
+            margin: 0 0 40px 0;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            display: table;
+        }
+
+        @media screen and (max-width: 580px) {
+            .table {
+                display: block;
+            }
+        }
+
+        .row {
+            display: table-row;
+            background: #f6f6f6;
+        }
+
+        .row:nth-of-type(odd) {
+            background: #e9e9e9;
+        }
+
+        .row.header {
+            font-weight: 900;
+            color: #ffffff;
+            background: #ea6153;
+        }
+
+        .row.green {
+            background: #27ae60;
+        }
+
+        .row.blue {
+            background: #2980b9;
+        }
+
+        @media screen and (max-width: 580px) {
+            .row {
+                padding: 14px 0 7px;
+                display: block;
+            }
+
+            .row.header {
+                padding: 0;
+                height: 6px;
+            }
+
+            .row.header .cell {
+                display: none;
+            }
+
+            .row .cell {
+                margin-bottom: 10px;
+            }
+
+            .row .cell:before {
+                margin-bottom: 3px;
+                content: attr(data-title);
+                min-width: 98px;
+                font-size: 10px;
+                line-height: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #969696;
+                display: block;
+            }
+        }
+
+        .cell {
+            padding: 6px 12px;
+            display: table-cell;
+        }
+
+        @media screen and (max-width: 580px) {
+            .cell {
+                padding: 2px 16px;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<title> Beach Activity</title>
+
+<body>
+
+    <center>
+        <h1 style="color: rgb(2, 16, 1);"> Beach Activity Data base</h1>
+        <h3 style="color: rgb(65, 132, 47);"> Web Application using Django</h3>
+        <hr />
+        <form method="POST" action="sortemp">
+            {% csrf_token %}
+            <label for="Sort"></label>
+            <select id="Sort" name="Sort">
+                <option value="customer_id">customer_id</option>
+                <option value="first_name">first_name</option>
+                <option value="middle_name">middle_name</option>
+                <option value="last_name">last_name</option>
+                <option value="street">street</option>
+                <option value="pincode">pincode</option>
+                <option value="age">age</option>
+                <option value="phone">phone</option>
+                <option value="email">email</option>
+                <option value="membership_card">membership_card</option>
+            </select>
+            <input type="submit" value="Sort" />
+        </form>
+
+        <a href="{% url 'Insertemp' %}"><button>Insert Customer Data</button></a> <br>
+
+
+        <div style="width: 80%">
+            <table class="table">
+                <tr class="row header">
+                    <th class="cell">customer_id</th>
+                    <th class="cell">first_name</th>
+                    <th class="cell">middle_name</th>
+                    <th class="cell">last_name</th>
+                    <th class="cell">street</th>
+                    <th class="cell">pincode</th>
+                    <th class="cell">age</th>
+                    <th class="cell">phone</th>
+                    <th class="cell">email</th>
+                    <th class="cell">membership_card</th>
+                </tr>
+                {% for result in data%}
+                <tr class="row">
+                    <td class="cell">{{result.customer_id}} </td>
+                    <td class="cell">{{result.first_name}} </td>
+                    <td class="cell">{{result.middle_name}} </td>
+                    <td class="cell">{{result.last_name}} </td>
+                    <td class="cell">{{result.street}} </td>
+                    <td class="cell">{{result.pincode}} </td>
+                    <td class="cell">{{result.age}} </td>
+                    <td class="cell">{{result.phone}} </td>
+                    <td class="cell">{{result.email}} </td>
+                    <td class="cell">{{result.membership_card}} </td>
+                    <td><a href="Edit/{{result.customer_id}}">Edit</a></td>
+                    <td><a href="Delete/{{result.customer_id}}"
+                            onclick="return confirm('Are you sure to delete ? ')">Delete</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <br>
+
+            <a href="{% url 'home'%}"> Home Page </a>
+        </div>
+
+
+    </center>
+</body>
+
+<!-- </head> -->
+
+
+</html>

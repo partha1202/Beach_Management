@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        body {
+            background-image: linear-gradient(0deg, #00000010, #00000010), url("https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?cs=srgb&dl=pexels-pixabay-235985.jpg&fm=jpg");
+        }
+    </style>
+</head>
+
+<title> Beach Activity</title>
+
+<body>
+
+    <center>
+        <h1 style="color: rgb(2, 16, 1);"> Editing the existing records</h1>
+        <h3 style="color: rgb(58, 255, 3);"> Web Application using Django</h3>
+        <hr />
+        <form method="POST" action="/Update/{{EmpModel.customer_id}}">
+            {% csrf_token %}
+
+            <table border="1">
+                <tr>
+                    <td> customer_id</td>
+                    <td> <input type="number" name="customer_id" value="{{EmpModel.customer_id}}"> </td>
+                </tr>
+
+                <tr>
+                    <td> first_name</td>
+                    <td> <input type="text" name="first_name" value="{{EmpModel.first_name}}"></td>
+                </tr>
+
+                <tr>
+                    <td> middle_name</td>
+                    <td> <input type="text" name="middle_name" value="{{EmpModel.middle_name}}"></td>
+                </tr>
+
+                <tr>
+                    <td> last_name</td>
+                    <td> <input type="text" name="last_name" value="{{EmpModel.last_name}}"></td>
+                </tr>
+
+                <tr>
+                    <td> street</td>
+                    <td> <input type="text" name="street" value="{{EmpModel.street}}"></td>
+                </tr>
+
+                <tr>
+                    <td> pincode</td>
+                    <td> <input type="number" name="pincode" value="{{EmpModel.pincode}}"></td>
+                </tr>
+
+                <tr>
+                    <td> age</td>
+                    <td> <input type="number" name="age" value="{{EmpModel.age}}"></td>
+                </tr>
+
+                <tr>
+                    <td> phone</td>
+                    <td> <input type="number" name="phone" value="{{EmpModel.phone}}"></td>
+                </tr>
+
+                <tr>
+                    <td> email</td>
+                    <td> <input type="email" name="email" value="{{EmpModel.email}}"></td>
+                </tr>
+
+                <tr>
+                    <td> membership_card</td>
+                    {% if EmpModel.membership_card %}
+                    <td>
+                        <div>
+                            <input type="radio" id="True" name="membership_card" value="True" checked>
+                            <label for="True">True</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="" name="membership_card" value="False">
+                            <label for="">False</label>
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div>
+                            <input type="radio" id="True" name="membership_card" value="True">
+                            <label for="True">True</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="" name="membership_card" value="False" checked>
+                            <label for="">False</label>
+                        </div>
+
+                    </td>
+                    {% endif %}
+                </tr>
+
+                <tr>
+                    <td><input type="submit" value="Update Record"></td>
+                    <td> {% if messages %}
+                        {% for mess in messages %}
+                        <b style="color: chartreuse"> {{mess}}</b>
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <a href="/index">Customer Records</a>
+            <br>
+
+            <a href="{% url 'home'%}"> Home Page </a>
+        </form>
+    </center>
+</body>
+
+<!-- </head> -->
+
+
+</html>
